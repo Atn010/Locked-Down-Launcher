@@ -44,9 +44,12 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
 
             // only apps which are launchable
             if (context.getPackageManager().getLaunchIntentForPackage(pkg) != null) {
+                if (apps.get(i).packageName.equals("com.android.settings") ||
+                    apps.get(i).packageName.contains("com.pulsemini")) {
                 AppModel app = new AppModel(context, apps.get(i));
                 app.loadLabel(context);
                 items.add(app);
+                }
             }
         }
 
