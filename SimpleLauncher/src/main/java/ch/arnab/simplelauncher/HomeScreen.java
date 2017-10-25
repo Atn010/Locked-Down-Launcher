@@ -1,10 +1,13 @@
 package ch.arnab.simplelauncher;
 
-import android.app.ActivityManager;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -18,7 +21,8 @@ import java.util.List;
 
 public class HomeScreen extends FragmentActivity {
 
-    private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP));
+    private final List blockedKeys = new ArrayList(Arrays.asList(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_UP,KeyEvent.KEYCODE_POWER));
+    public final static int REQUEST_CODE = 10101;
 
     protected  void onResume(){
         super.onResume();
@@ -94,12 +98,17 @@ public class HomeScreen extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.homescreen);
 
         //instance = this;
         //registerKioskModeScreenOffReceiver();
         startKioskService();
+
+        if (checkDrawOverlayPermission()) {
+            startService(new Intent(this, PowerButtonService.class));
+        }
+
         /*
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -130,6 +139,33 @@ public class HomeScreen extends FragmentActivity {
         return true;
     }
 
+    public boolean checkDrawOverlayPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+        if (!Settings.canDrawOverlays(this)) {
+            /** if not construct intent to request permission */
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getPackageName()));
+            /** request permission via start activity for result */
+            startActivityForResult(intent, REQUEST_CODE);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE) {
+            if (Settings.canDrawOverlays(this)) {
+                startService(new Intent(this, PowerButtonService.class));
+            }
+        }
+    }
+/*
     @Override
     protected void onPause() {
         super.onPause();
@@ -139,7 +175,7 @@ public class HomeScreen extends FragmentActivity {
 
         activityManager.moveTaskToFront(getTaskId(), 0);
     }
-
+*/
     /*
     public static void preventStatusBarExpansion(Context context) {
         WindowManager manager = ((WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE));
