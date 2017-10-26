@@ -42,12 +42,6 @@
         </service>
 
 
-        <receiver android:name=".BootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name="ch.arnab.simplelauncher.HomeScreen"
             android:label="@string/app_name"

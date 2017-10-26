@@ -20,7 +20,7 @@ public class customViewGroup extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.v("customViewGroup", "**********Intercepted");
+        Log.v("Statusbar Pulldown", "Intercepted");
         return true;
     }
 }

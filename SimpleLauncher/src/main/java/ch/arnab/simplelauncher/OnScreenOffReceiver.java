@@ -16,6 +16,7 @@ public class OnScreenOffReceiver extends BroadcastReceiver {
     private static final String PREF_KIOSK_MODE = "pref_kiosk_mode";
 
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
 

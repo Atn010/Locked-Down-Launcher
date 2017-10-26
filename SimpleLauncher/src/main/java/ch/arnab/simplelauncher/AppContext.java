@@ -7,7 +7,9 @@ import android.content.IntentFilter;
 import android.os.PowerManager;
 
 /**
- * Created by atn01 on 10/18/2017.
+ * Created by atn010 on 10/18/2017.
+ * @author atn01 0
+ *
  */
 
 public class AppContext extends Application {
@@ -35,7 +37,7 @@ public class AppContext extends Application {
         if(wakeLock == null) {
             // lazy loading: first call, create wakeLock via PowerManager.
             PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "wakeup");
+            wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "wakeup");
         }
         return wakeLock;
     }

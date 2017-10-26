@@ -16,7 +16,7 @@ public class AppListFragment extends ListFragment implements LoaderManager.Loade
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setEmptyText("No Applications");
+        setEmptyText("No Approved Detected Applications");
 
         mAdapter = new AppListAdapter(getActivity());
         setListAdapter(mAdapter);

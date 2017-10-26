@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 /**
  * Created by atn01 on 10/25/2017.
@@ -32,7 +31,7 @@ public class PowerButtonService extends Service {
             public void onCloseSystemDialogs(String reason) {
                 if ("globalactions".equals(reason)) {
                     Log.i("Key", "Long press on power button");
-                    Toast.makeText(getContext(), "You Pressed the Power Button", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "You Pressed the Power Button", Toast.LENGTH_SHORT).show();
                     Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
                     sendBroadcast(closeDialog);
                 } else if ("homekey".equals(reason)) {
