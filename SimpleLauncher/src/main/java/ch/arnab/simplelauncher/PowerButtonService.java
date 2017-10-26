@@ -52,6 +52,12 @@ public class PowerButtonService extends Service {
                         || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN
                         || event.getKeyCode() == KeyEvent.KEYCODE_CAMERA
                         || event.getKeyCode() == KeyEvent.KEYCODE_POWER
+                        || event.getKeyCode() == KeyEvent.KEYCODE_APP_SWITCH
+                        || event.getKeyCode() == KeyEvent.KEYCODE_3D_MODE
+                        || event.getKeyCode() == KeyEvent.KEYCODE_BRIGHTNESS_UP
+                        || event.getKeyCode() == KeyEvent.KEYCODE_BRIGHTNESS_DOWN
+                        || event.getKeyCode() == KeyEvent.KEYCODE_CALL
+                        || event.getKeyCode() == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE
                         || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
                     Log.i("Key", "keycode " + event.getKeyCode());
                     return true;

@@ -98,7 +98,7 @@ public class HomeScreen extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.homescreen);
 
         //instance = this;
@@ -109,13 +109,31 @@ public class HomeScreen extends FragmentActivity {
             startService(new Intent(this, PowerButtonService.class));
         }
 
-        /*
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-*/
-        //ActionBar actionBar = getActionBar();
-        //actionBar.hide();
+        final View view = (View) findViewById(android.R.id.content);
+        if (view != null) {
+            //"hides" back, home and return button on screen.
+            view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE |
+                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                    View.SYSTEM_UI_FLAG_IMMERSIVE |
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                    View.SYSTEM_UI_FLAG_FULLSCREEN);
+            view.setOnSystemUiVisibilityChangeListener
+                    (new View.OnSystemUiVisibilityChangeListener() {
+                        @Override
+                        public void onSystemUiVisibilityChange(int visibility) {
+                            // Note that system bars will only be "visible" if none of the
+                            // LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
+                            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE |
+                                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                                        View.SYSTEM_UI_FLAG_IMMERSIVE |
+                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                                        View.SYSTEM_UI_FLAG_FULLSCREEN);
+                            }
+                        }
+                    });
+        }
+
     }
 
     private void startKioskService() { // ... and this method
