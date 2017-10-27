@@ -6,7 +6,6 @@ import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,6 +21,9 @@ public class PowerButtonService extends Service {
 
     }
 
+    /**
+     * On create Detect Long Power Button Press and  block it
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -29,6 +31,7 @@ public class PowerButtonService extends Service {
 
             //home or recent button
             public void onCloseSystemDialogs(String reason) {
+
                 if ("globalactions".equals(reason)) {
                     Log.i("Key", "Long press on power button");
                     //Toast.makeText(getContext(), "You Pressed the Power Button", Toast.LENGTH_SHORT).show();
@@ -45,45 +48,30 @@ public class PowerButtonService extends Service {
                 }
             }
 
-            @Override
-            public boolean dispatchKeyEvent(KeyEvent event) {
-                if ( event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP
-                        || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN
-                        || event.getKeyCode() == KeyEvent.KEYCODE_CAMERA
-                        || event.getKeyCode() == KeyEvent.KEYCODE_POWER
-                        || event.getKeyCode() == KeyEvent.KEYCODE_APP_SWITCH
-                        || event.getKeyCode() == KeyEvent.KEYCODE_3D_MODE
-                        || event.getKeyCode() == KeyEvent.KEYCODE_BRIGHTNESS_UP
-                        || event.getKeyCode() == KeyEvent.KEYCODE_BRIGHTNESS_DOWN
-                        || event.getKeyCode() == KeyEvent.KEYCODE_CALL
-                        || event.getKeyCode() == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE
-                        || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
-                    Log.i("Key", "keycode " + event.getKeyCode());
-                    return true;
-                }else {
-                    return super.dispatchKeyEvent(event);
-                }
-            }
+
         };
+
 
         mLinear.setFocusable(true);
 
         View mView = LayoutInflater.from(this).inflate(R.layout.service_layout, mLinear);
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-        //params
+        // params
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 100,
                 100,
-                WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_FULLSCREEN
                         | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
                         | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 PixelFormat.TRANSLUCENT);
-        params.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
+        params.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
         wm.addView(mView, params);
     }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {

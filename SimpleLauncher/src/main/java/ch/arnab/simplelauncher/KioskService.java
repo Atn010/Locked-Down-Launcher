@@ -24,6 +24,9 @@ public class KioskService extends Service {
     private Context ctx = null;
     private boolean running = false;
 
+    /**
+     * On Destroying the Kiosk Service
+     */
     @Override
     public void onDestroy() {
         Log.i(TAG, "Stopping service 'KioskService'");
@@ -31,6 +34,14 @@ public class KioskService extends Service {
         super.onDestroy();
     }
 
+    /**
+     * On Starting the Service
+     *
+     * @param intent
+     * @param flags necessary flags
+     * @param startId the ID
+     * @return
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "Starting service 'KioskService'");
@@ -57,6 +68,9 @@ public class KioskService extends Service {
         return Service.START_NOT_STICKY;
     }
 
+    /**
+     * handles Kiosk Mode
+     */
     private void handleKioskMode() {
         // is Kiosk Mode active?
         if(PrefUtils.isKioskModeActive(ctx)) {
@@ -67,6 +81,10 @@ public class KioskService extends Service {
         }
     }
 
+    /**
+     * Check if the app is in backrground
+     * @return
+     */
     private boolean isInBackground() {
         ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
 
@@ -75,6 +93,9 @@ public class KioskService extends Service {
         return (!ctx.getApplicationContext().getPackageName().equals(componentInfo.getPackageName()));
     }
 
+    /**
+     * Restore app into the front
+     */
     private void restoreApp() {
         // Restart activity
         Intent i = new Intent(ctx, HomeScreen.class);
