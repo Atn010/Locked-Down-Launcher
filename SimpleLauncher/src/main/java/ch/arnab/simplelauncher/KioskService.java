@@ -68,6 +68,7 @@ public class KioskService extends Service {
         return Service.START_NOT_STICKY;
     }
 
+
     /**
      * handles Kiosk Mode
      */
