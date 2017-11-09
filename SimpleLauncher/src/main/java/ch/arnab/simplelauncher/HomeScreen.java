@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
@@ -265,35 +264,12 @@ public class HomeScreen extends FragmentActivity {
             Intent intent2 = new Intent(this, KioskService.class);
             stopService(intent2);
 
-            Log.i("Try to open", "Settings");
-            openApp(this,"com.admin.admin");
+            startActivity(new Intent(this,AdminMenu.class));
         }
 
 
     }
 
-    /** Open another app.
-     * @param context current Context, like Activity, App, or Service
-     * @param packageName the full package name of the app to open
-     * @return true if likely successful, false if unsuccessful
-     */
-    public static boolean openApp(Context context, String packageName) {
-        PackageManager manager = context.getPackageManager();
-        try {
-            Intent i = manager.getLaunchIntentForPackage(packageName);
-            if (i == null) {
-                Log.i("Package", "Package Not Found" + packageName);
-                return false;
-                //throw new PackageManager.NameNotFoundException();
-            }
-            i.addCategory(Intent.CATEGORY_LAUNCHER);
-            context.startActivity(i);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
 
 }
