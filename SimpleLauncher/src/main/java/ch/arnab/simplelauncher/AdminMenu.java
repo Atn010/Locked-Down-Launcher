@@ -11,17 +11,22 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 
 public class AdminMenu extends Activity {
+    DataStore dataStore = new DataStore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
+
     }
 
     public void openSettings(View view){
-        openApp(this,"com.admin.admin");
+        openApp(this,"com.android.settings");
     }
 
     public void openAppList(View view){
@@ -29,7 +34,7 @@ public class AdminMenu extends Activity {
     }
 
     public void changeAdminPassword(View view){
-
+        showAlertWindow();
     }
 
 
@@ -60,8 +65,13 @@ public class AdminMenu extends Activity {
         builder.show();
     }
 
+
     public void changePassword(String previousAdminPassword, String newAdminPassword, String confirmedAdminPassword){
 
+    }
+
+    public void toastInformation(String information){
+        Toast.makeText(this,information ,Toast.LENGTH_SHORT).show();
     }
 
 
@@ -73,18 +83,18 @@ public class AdminMenu extends Activity {
     public static boolean openApp(Context context, String packageName) {
             PackageManager manager = context.getPackageManager();
             try {
-            Intent i = manager.getLaunchIntentForPackage(packageName);
+                Intent i = manager.getLaunchIntentForPackage(packageName);
             if (i == null) {
-            Log.i("Package", "Package Not Found" + packageName);
-            return false;
-            //throw new PackageManager.NameNotFoundException();
+                Log.i("Package", "Package Not Found" + packageName);
+                return false;
+                //throw new PackageManager.NameNotFoundException();
             }
             i.addCategory(Intent.CATEGORY_LAUNCHER);
-            context.startActivity(i);
-            return true;
+                context.startActivity(i);
+                return true;
             } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+                e.printStackTrace();
+                return false;
             }
     }
 }
