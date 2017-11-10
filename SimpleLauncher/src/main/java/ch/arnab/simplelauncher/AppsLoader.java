@@ -16,6 +16,8 @@ import java.util.Comparator;
  */
 public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
     ArrayList<AppModel> mInstalledApps;
+    DataStore dataStore = DataStore.getInstance();
+
 
     final PackageManager mPm;
     PackageIntentReceiver mPackageObserver;
@@ -26,10 +28,12 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
         mPm = context.getPackageManager();
     }
 
+
     @Override
     public ArrayList<AppModel> loadInBackground() {
         // retrieve the list of installed applications
         List<ApplicationInfo> apps = mPm.getInstalledApplications(0);
+
 
         if (apps == null) {
             apps = new ArrayList<ApplicationInfo>();
@@ -44,10 +48,13 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
 
             // only apps which are launchable
             if (context.getPackageManager().getLaunchIntentForPackage(pkg) != null) {
+
+
                 if (apps.get(i).packageName.contains("com.atn010")) {
-                AppModel app = new AppModel(context, apps.get(i));
-                app.loadLabel(context);
-                items.add(app);
+                    AppModel app = new AppModel(context, apps.get(i));
+                    app.loadLabel(context);
+
+                    items.add(app);
                 }
             }
         }
@@ -57,6 +64,8 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
 
         return items;
     }
+
+
 
     @Override
     public void deliverResult(ArrayList<AppModel> apps) {

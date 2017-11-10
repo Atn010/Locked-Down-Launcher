@@ -7,16 +7,19 @@ import java.util.ArrayList;
  */
 
 class DataStore {
-     static final DataStore ourInstance = new DataStore();
+    private static DataStore ourInstance = null;
 
-    static DataStore getInstance() {
+    public static DataStore getInstance() {
+        if(ourInstance == null){
+            ourInstance = new DataStore();
+        }
         return ourInstance;
     }
 
-    public DataStore() {
-
+    private DataStore() {
         adminPassword = "admin";
          appList = new ArrayList<>();
+         appList.add("com.atn010.primaryapp");
 
     }
     String adminPassword;

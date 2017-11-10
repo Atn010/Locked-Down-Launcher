@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 
 public class AdminMenu extends Activity {
-    DataStore dataStore = new DataStore.getInstance();
+    DataStore dataStore = DataStore.getInstance();
 
 
     @Override
@@ -40,19 +40,28 @@ public class AdminMenu extends Activity {
 
     public void showAlertWindow(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Admin Password");
+        builder.setTitle("Change Admin Password");
 
-        // Set up the input
-        final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(input);
+        final EditText previousAdminPassword = new EditText(this);
+        previousAdminPassword.setHint("Previous Admin Password");
+        previousAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(previousAdminPassword);
+
+        final EditText newAdminPassword = new EditText(this);
+        newAdminPassword.setHint("Previous Admin Password");
+        newAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(newAdminPassword);
+
+        final EditText confirmNewAdminPassword = new EditText(this);
+        confirmNewAdminPassword.setHint("Previous Admin Password");
+        confirmNewAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(confirmNewAdminPassword);
 
         // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                changePassword(input.getText().toString(),input.getText().toString(),input.getText().toString());
+                changePassword(confirmNewAdminPassword.getText().toString(),newAdminPassword.getText().toString(),confirmNewAdminPassword.getText().toString());
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -65,8 +74,35 @@ public class AdminMenu extends Activity {
         builder.show();
     }
 
+    public void changeAdminPasswordDialogBox(){
+
+    }
+
 
     public void changePassword(String previousAdminPassword, String newAdminPassword, String confirmedAdminPassword){
+
+        String message = "";
+        if(previousAdminPassword.equals(dataStore.adminPassword)){
+
+            if(newAdminPassword.length()>=5){
+
+                if(newAdminPassword.equals(confirmedAdminPassword)){
+                    dataStore.adminPassword = newAdminPassword;
+                    message = "successfully changed admin password";
+                }else {
+                    message = "new and confirm admin password does not match";
+                }
+
+            }else{
+                message = "incorrect new password length";
+            }
+
+
+        }else{
+            message = "incorrect previous password";
+        }
+
+        toastInformation(message);
 
     }
 

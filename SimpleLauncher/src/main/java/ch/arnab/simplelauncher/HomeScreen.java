@@ -26,6 +26,8 @@ public class HomeScreen extends FragmentActivity {
     private static final int PRESS_INTERVAL = 2500;
     private long mUpKeyEventTime = 0;
 
+    DataStore dataStore = DataStore.getInstance();
+
 
 
     /**
@@ -257,7 +259,7 @@ public class HomeScreen extends FragmentActivity {
 
         Log.i("Entered password", password);
 
-        if(password.equals("admin") ) {
+        if(password.equals(dataStore.adminPassword) ) {
             Intent intent1 = new Intent(this, PowerButtonService.class);
             stopService(intent1);
 
