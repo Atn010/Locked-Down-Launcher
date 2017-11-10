@@ -11,6 +11,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -34,7 +35,8 @@ public class AdminMenu extends Activity {
     }
 
     public void changeAdminPassword(View view){
-        showAlertWindow();
+        //showAlertWindow();
+        changeAdminPasswordDialogBox();
     }
 
 
@@ -75,7 +77,55 @@ public class AdminMenu extends Activity {
     }
 
     public void changeAdminPasswordDialogBox(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
+        dialog.setTitle("Change Admin Password");
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        /*
+        final EditText titleBox = new EditText(this);
+        titleBox.setHint("Title");
+        layout.addView(titleBox);
+
+        final EditText descriptionBox = new EditText(this);
+        descriptionBox.setHint("Description");
+        layout.addView(descriptionBox);
+        */
+        
+        final EditText previousAdminPassword = new EditText(this);
+        previousAdminPassword.setHint("Input Previous Admin Password");
+        previousAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        layout.addView(previousAdminPassword);
+
+        final EditText newAdminPassword = new EditText(this);
+        newAdminPassword.setHint("Input New Admin Password");
+        newAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        layout.addView(newAdminPassword);
+
+        final EditText confirmNewAdminPassword = new EditText(this);
+        confirmNewAdminPassword.setHint("Confirm New Admin Password");
+        confirmNewAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        layout.addView(confirmNewAdminPassword);
+
+        // Set up the buttons
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                changePassword(previousAdminPassword.getText().toString(),newAdminPassword.getText().toString(),confirmNewAdminPassword.getText().toString());
+            }
+        });
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+
+        dialog.setView(layout);
+        dialog.show();
     }
 
 
