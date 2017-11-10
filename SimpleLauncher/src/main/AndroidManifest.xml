@@ -33,7 +33,7 @@
         <service
             android:name=".PowerButtonService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".HomeScreen"
@@ -48,9 +48,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminMenu"
-            android:excludeFromRecents="true"
-            android:autoRemoveFromRecents="true"></activity>
+        <activity
+            android:name=".AdminMenu"
+            android:autoRemoveFromRecents="true"
+            android:excludeFromRecents="true" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

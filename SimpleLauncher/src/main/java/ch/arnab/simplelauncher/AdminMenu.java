@@ -31,7 +31,7 @@ public class AdminMenu extends Activity {
     }
 
     public void openAppList(View view){
-
+    startActivity(new Intent(this, MainActivity.class));
     }
 
     public void changeAdminPassword(View view){
