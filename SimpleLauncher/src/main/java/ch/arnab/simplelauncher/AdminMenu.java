@@ -92,7 +92,7 @@ public class AdminMenu extends Activity {
         descriptionBox.setHint("Description");
         layout.addView(descriptionBox);
         */
-        
+
         final EditText previousAdminPassword = new EditText(this);
         previousAdminPassword.setHint("Input Previous Admin Password");
         previousAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);

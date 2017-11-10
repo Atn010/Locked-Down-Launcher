@@ -49,14 +49,36 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
             // only apps which are launchable
             if (context.getPackageManager().getLaunchIntentForPackage(pkg) != null) {
 
+                for(int z =0; z<dataStore.appList.size();z++){
 
+                    String appPackageName = dataStore.appList.get(z);
+
+
+                    if (apps.get(i).packageName.contains(appPackageName)) {
+                        AppModel app = new AppModel(context, apps.get(i));
+                        app.loadLabel(context);
+
+                        items.add(app);
+                        System.out.println("Found " + i +" = "+appPackageName);
+                    }
+
+                }
+
+
+
+
+
+
+                /*
                 if (apps.get(i).packageName.contains("com.atn010")) {
                     AppModel app = new AppModel(context, apps.get(i));
                     app.loadLabel(context);
 
                     items.add(app);
                 }
+                */
             }
+
         }
 
         // sort the list
