@@ -17,7 +17,8 @@ import android.widget.TextView;
  */
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundButton.OnCheckedChangeListener
-{  SparseBooleanArray mCheckStates;
+{
+    SparseBooleanArray mCheckStates;
 
     Context context;
     int layoutResourceId;
