@@ -102,5 +102,4 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
 
     }
 
-
 }
