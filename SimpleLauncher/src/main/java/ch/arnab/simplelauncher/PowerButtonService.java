@@ -42,9 +42,11 @@ public class PowerButtonService extends Service {
         running = true;
         ctx = this;
 
-         final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         final View mView = createPowerBlocker();
         final WindowManager.LayoutParams params = param();
+        final View pView = viewBlocker();
+        final WindowManager.LayoutParams localLayoutParams = localLayoutParams();
 
         if(mView == null){
             Log.i("Power Service", "mView is Null");
@@ -56,6 +58,7 @@ public class PowerButtonService extends Service {
 
         try {
             wm.addView(mView, params);
+            wm.addView(pView,localLayoutParams);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -72,6 +75,7 @@ public class PowerButtonService extends Service {
                     }
                 }while(running);
                 wm.removeView(mView);
+                wm.removeView(pView);
                 stopSelf();
             }
         });
@@ -79,6 +83,36 @@ public class PowerButtonService extends Service {
         t.start();
         return Service.START_NOT_STICKY;
     }
+
+    public View viewBlocker(){
+        customViewGroup newView = new customViewGroup(this);
+        return newView;
+    }
+
+
+    public WindowManager.LayoutParams localLayoutParams(){
+        WindowManager manager = ((WindowManager) getApplicationContext()
+                .getSystemService(Context.WINDOW_SERVICE));
+
+        WindowManager.LayoutParams localLayoutParams = new WindowManager.LayoutParams();
+        localLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
+        localLayoutParams.gravity = Gravity.TOP;
+        localLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+
+                // this is to enable the notification to recieve touch events
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
+
+                // Draws over status bar
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+
+        localLayoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        localLayoutParams.height = (int) (50 * getResources()
+                .getDisplayMetrics().scaledDensity);
+        localLayoutParams.format = PixelFormat.TRANSPARENT;
+
+        return localLayoutParams;
+    }
+
 
     public WindowManager.LayoutParams param(){
         // params

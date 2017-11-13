@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.WindowManager;
@@ -126,7 +124,7 @@ public class HomeScreen extends FragmentActivity {
         }
         startKioskService();
 
-        blockStatusBarPullDown();
+        //blockStatusBarPullDown();
 
     }
 
@@ -196,34 +194,6 @@ public class HomeScreen extends FragmentActivity {
                 startService(new Intent(this, PowerButtonService.class));
             }
         }
-    }
-
-    /**
-     * Create an invisible Alert Window to block Status Bar Pull Down
-     */
-    private void blockStatusBarPullDown() {
-        WindowManager manager = ((WindowManager) getApplicationContext()
-                .getSystemService(Context.WINDOW_SERVICE));
-
-        WindowManager.LayoutParams localLayoutParams = new WindowManager.LayoutParams();
-        localLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
-        localLayoutParams.gravity = Gravity.TOP;
-        localLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-
-                // this is to enable the notification to recieve touch events
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-
-                // Draws over status bar
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
-
-        localLayoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        localLayoutParams.height = (int) (50 * getResources()
-                .getDisplayMetrics().scaledDensity);
-        localLayoutParams.format = PixelFormat.TRANSPARENT;
-
-        customViewGroup newView = new customViewGroup(this);
-
-        manager.addView(newView, localLayoutParams);
     }
 
 
