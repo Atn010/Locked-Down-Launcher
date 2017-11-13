@@ -55,6 +55,7 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
 
 
                     if (apps.get(i).packageName.contains(appPackageName)) {
+
                         AppModel app = new AppModel(context, apps.get(i));
                         app.loadLabel(context);
 
@@ -63,11 +64,6 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
                     }
 
                 }
-
-
-
-
-
 
                 /*
                 if (apps.get(i).packageName.contains("com.atn010")) {
@@ -121,7 +117,8 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
         if (mInstalledApps != null) {
             // If we currently have a result available, deliver it
             // immediately.
-            deliverResult(mInstalledApps);
+            deliverResult(loadInBackground());
+            //deliverResult(mInstalledApps);
         }
 
         // watch for changes in app install and uninstall operation
@@ -129,7 +126,7 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
             mPackageObserver = new PackageIntentReceiver(this);
         }
 
-        if (takeContentChanged() || mInstalledApps == null ) {
+        if (takeContentChanged() || mInstalledApps == null) {
             // If the data has changed since the last time it was loaded
             // or is not currently available, start a load.
             forceLoad();

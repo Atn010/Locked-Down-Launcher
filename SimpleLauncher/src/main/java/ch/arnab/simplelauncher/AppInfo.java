@@ -16,11 +16,12 @@ public class AppInfo {
         super();
     }
 
-    public AppInfo(Drawable icon, String applicationName, String applicationPackage) {
+    public AppInfo(Drawable icon, String applicationName, String applicationPackage, boolean isActive) {
         super();
         this.icon = icon;
         this.applicationName = applicationName;
         this.applicationPackage = applicationPackage;
+        this.isActive = isActive;
     }
 }
 

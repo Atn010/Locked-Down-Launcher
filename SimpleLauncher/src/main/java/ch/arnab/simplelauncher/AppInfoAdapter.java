@@ -38,6 +38,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
 
+
         View row = convertView;
         AppInfoHolder holder= null;
 
@@ -54,10 +55,12 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
             holder.chkSelect = (CheckBox) row.findViewById(R.id.cb_app);
 
             row.setTag(holder);
+            System.out.println("a null Row");
 
         }
         else{
             holder = (AppInfoHolder)row.getTag();
+            System.out.println(position + " is in Row");
         }
 
 
@@ -69,15 +72,23 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
         holder.chkSelect.setTag(position);
         holder.chkSelect.setChecked(mCheckStates.get(position, false));
         holder.chkSelect.setOnCheckedChangeListener(this);
+        //holder.chkSelect.toggle();
         return row;
 
     }
-    public boolean isChecked(int position) {
+
+
+
+    private boolean isChecked(int position) {
+        System.out.println(position + "is checked");
         return mCheckStates.get(position, false);
+
     }
 
-    public void setChecked(int position, boolean isChecked) {
+
+    private void setChecked(int position, boolean isChecked) {
         mCheckStates.put(position, isChecked);
+        System.out.println(position + "Something is checked");
 
     }
 
@@ -91,6 +102,10 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
         mCheckStates.append((Integer) buttonView.getTag(), isChecked);
 
 
+        System.out.println((Integer) buttonView.getTag() + " Something is changed");
+
+
+
     }
     static class AppInfoHolder
     {
@@ -101,5 +116,6 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
         boolean isActive;
 
     }
+
 
 }

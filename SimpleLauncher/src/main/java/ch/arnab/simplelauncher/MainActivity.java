@@ -19,11 +19,16 @@ public class MainActivity extends Activity {
     AppInfoAdapter adapter ;
     AppInfo app_info[] ;
     @SuppressLint("WrongConstant")
+    DataStore dataStore = DataStore.getInstance();
+
+
+
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ArrayList <String> appList = new ArrayList<>();
+        final ArrayList <String> appList = new ArrayList<String>();
 
 
         final ListView listApplication = (ListView)findViewById(R.id.listApplication);
@@ -38,7 +43,7 @@ public class MainActivity extends Activity {
                 appList.clear();
 
                 StringBuilder result = new StringBuilder();
-                for(int i=0;i<adapter.mCheckStates.size();i++)
+                for(int i=0;i<adapter.getCount();i++)
                 {
                     if(adapter.mCheckStates.get(i))
                     {
@@ -52,6 +57,9 @@ public class MainActivity extends Activity {
                 System.out.println(result);
                 Log.i("Result", "onClick: " + printArrayList(appList));
                 Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+                dataStore.appList.clear();
+                dataStore.appList.addAll(appList);
+                finish();
             }
 
         });
@@ -68,25 +76,16 @@ public class MainActivity extends Activity {
         int counter = 0;
         for(PackageInfo item: pInfo){
 
-            /*
-            final PackageManager ACPM = getApplicationContext().getPackageManager();
-            ApplicationInfo ai;
-            try {
-                ai = ACPM.getApplicationInfo( this.getPackageName(), 0);
-                ai = ACPM.getApplicationInfo(getPackageName(),0);
-            } catch (final Exception e) {
-                ai = null;
-            }
-            final String applicationName = (String) (ai != null ? ACPM.getApplicationLabel(ai) : "(unknown)");
-            */
-
             try{
 
                 applicationInfo = pm.getApplicationInfo(item.packageName, 1);
+                if(applicationInfo==null){
+                    break;
+                }
 
 
                 app_info[counter] = new AppInfo(pm.getApplicationIcon(applicationInfo),
-                        String.valueOf(pm.getApplicationLabel(applicationInfo)), item.packageName );
+                        String.valueOf(pm.getApplicationLabel(applicationInfo)), item.packageName,false );
 
                 System.out.println(counter);
 
