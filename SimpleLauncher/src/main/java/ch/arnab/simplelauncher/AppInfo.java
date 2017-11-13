@@ -10,6 +10,7 @@ public class AppInfo {
     public Drawable icon;
     public String applicationName;
     public String applicationPackage;
+    public boolean isActive;
 
     public AppInfo() {
         super();
@@ -19,7 +20,7 @@ public class AppInfo {
         super();
         this.icon = icon;
         this.applicationName = applicationName;
-        this.applicationName = applicationPackage;
+        this.applicationPackage = applicationPackage;
     }
 }
 

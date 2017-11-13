@@ -12,6 +12,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by atn01 on 11/10/2017.
  */
@@ -23,6 +25,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
     Context context;
     int layoutResourceId;
     AppInfo  data[] = null;
+    ArrayList<String> selectedStrings = new ArrayList<String>();
 
     public AppInfoAdapter(Context context, int layoutResourceId, AppInfo[] data){
         super(context, layoutResourceId,data);
@@ -83,10 +86,10 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
 
     }
     @Override
-    public void onCheckedChanged(CompoundButton buttonView,
-                                 boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         mCheckStates.append((Integer) buttonView.getTag(), isChecked);
+
 
     }
     static class AppInfoHolder
@@ -95,6 +98,9 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
         TextView txtTitle;
         TextView textPKGName;
         CheckBox chkSelect;
+        boolean isActive;
 
     }
+
+
 }

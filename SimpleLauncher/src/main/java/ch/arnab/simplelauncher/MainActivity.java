@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
                         result.append(app_info[i].applicationName);
                         result.append("\n");
-                        appList.add(app_info[i].applicationName);
+                        appList.add(app_info[i].applicationPackage);
                     }
 
                 }
