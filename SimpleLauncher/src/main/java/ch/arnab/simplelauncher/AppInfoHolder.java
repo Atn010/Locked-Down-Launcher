@@ -1,13 +1,14 @@
 package ch.arnab.simplelauncher;
 
-/**
- * Created by atn01 on 11/10/2017.
- */
-
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.CheckBox;
 
+/**
+ * This will hold Application Info.
+ * Testing is required to factore out this Class.
+ * @author atn010
+ */
 public class AppInfoHolder {
 
     ImageView imgIcon;

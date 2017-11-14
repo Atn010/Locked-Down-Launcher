@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by atn01 on 10/25/2017.
+ * @author atn010
  */
 
 public class PowerButtonService extends Service {

@@ -7,8 +7,9 @@ import android.content.IntentFilter;
 import android.os.PowerManager;
 
 /**
- * Created by atn010 on 10/18/2017.
- * @author atn01 0
+ * This is intended to block a Screen off, it failed apparently.
+ * Further development is needed to block screen off.
+ * @author atn010
  *
  */
 

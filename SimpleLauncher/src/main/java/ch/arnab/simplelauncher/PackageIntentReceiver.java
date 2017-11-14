@@ -9,7 +9,8 @@ import android.content.IntentFilter;
  * Helper class to look for interesting changes to the installed apps
  * so that the loader can be updated.
  *
- * @Credit http://developer.android.com/reference/android/content/AsyncTaskLoader.html
+ * Credit http://developer.android.com/reference/android/content/AsyncTaskLoader.html
+ * @author Arnab Chakraborty
  */
 public class PackageIntentReceiver extends BroadcastReceiver {
 

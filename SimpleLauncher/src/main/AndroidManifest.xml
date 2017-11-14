@@ -52,7 +52,7 @@
             android:name=".AdminMenu"
             android:autoRemoveFromRecents="true"
             android:excludeFromRecents="true" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".AdminAppList"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,8 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 
 /**
- * Created by atn01 on 10/18/2017.
+ * Receieve Off screen and force to turn on.
+ * @author  atn010
  */
 
 public class OnScreenOffReceiver extends BroadcastReceiver {

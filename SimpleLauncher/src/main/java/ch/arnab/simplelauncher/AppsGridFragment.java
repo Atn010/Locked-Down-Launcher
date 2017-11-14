@@ -10,7 +10,8 @@ import android.widget.GridView;
 import java.util.ArrayList;
 
 /**
- * Created by Arnab Chakraborty
+ * Set the Application in the Grid
+ * @author Arnab Chakraborty
  */
 public class AppsGridFragment extends GridFragment implements LoaderManager.LoaderCallbacks<ArrayList<AppModel>> {
 

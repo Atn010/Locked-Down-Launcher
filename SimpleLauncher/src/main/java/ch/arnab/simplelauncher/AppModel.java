@@ -7,7 +7,9 @@ import android.graphics.drawable.Drawable;
 import java.io.File;
 
 /**
- * @credit http://developer.android.com/reference/android/content/AsyncTaskLoader.html
+ * credit http://developer.android.com/reference/android/content/AsyncTaskLoader.html.
+ * This is an Application model which will hold the information to be displayed.
+ * @author Arnab Chakraborty
  */
 public class AppModel {
 

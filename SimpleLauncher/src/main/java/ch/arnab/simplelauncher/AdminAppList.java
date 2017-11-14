@@ -15,14 +15,28 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+/**
+ *  This is the main Admin Application List.
+ *  This class will display a list of installed application in a phone.
+ *  After selecting the Application to display, a toast is shown and the list of selected application is stored in Data Store.
+ *  Return to Admin Menu in the previous fragment.
+ * @author atn010
+ */
+public class AdminAppList extends Activity {
     AppInfoAdapter adapter ;
     AppInfo app_info[] ;
     @SuppressLint("WrongConstant")
     DataStore dataStore = DataStore.getInstance();
 
 
-
+    /**
+     * This will load and display a list of Application.
+     * A listener is created when clicking on button.
+     * When a button is clicked, all the selected application will be stored.
+     * A toast and log will display the application selected.
+     * The Activity will return to Admin Menu.
+     * @param savedInstanceState
+     */
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -56,7 +70,7 @@ public class MainActivity extends Activity {
                 }
                 System.out.println(result);
                 Log.i("Result", "onClick: " + printArrayList(appList));
-                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminAppList.this, result, Toast.LENGTH_SHORT).show();
                 dataStore.appList.clear();
                 dataStore.appList.addAll(appList);
                 finish();
@@ -102,6 +116,11 @@ public class MainActivity extends Activity {
 
     }
 
+    /**
+     * This is used to print the log
+     * @param appList
+     * @return
+     */
     private String printArrayList(ArrayList<String> appList) {
         String listBuild = null;
         for(int i = 0; i<appList.size();i++){

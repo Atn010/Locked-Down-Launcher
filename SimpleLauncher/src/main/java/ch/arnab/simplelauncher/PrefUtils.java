@@ -5,7 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
- * Created by Andreas Schrade on 19.02.2015.
+ * This locks see if Kiosk Mode.
+ * @author Andreas Schrade
  */
 public class PrefUtils {
     private static final String PREF_KIOSK_MODE = "pref_kiosk_mode";

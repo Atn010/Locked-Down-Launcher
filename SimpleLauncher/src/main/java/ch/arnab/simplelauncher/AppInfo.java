@@ -2,10 +2,11 @@ package ch.arnab.simplelauncher;
 
 import android.graphics.drawable.Drawable;
 
-/**
- * Created by atn01 on 11/10/2017.
- */
 
+/**
+ * This function will hold the Application Info.
+ * @author atn010
+ */
 public class AppInfo {
     public Drawable icon;
     public String applicationName;

@@ -14,11 +14,20 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-
+/**
+ * This a menu Activity which display 3 menu button which:
+ * Open Android Settings, Change Application Display List, and Open Change Password Window.
+ * Change Password will be displayed as an alert window. A toast will be displayed in cased of error.
+ * @author atn010
+ */
 public class AdminMenu extends Activity {
     DataStore dataStore = DataStore.getInstance();
 
 
+    /**
+     * This is on create command
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,73 +35,47 @@ public class AdminMenu extends Activity {
 
     }
 
+    /**
+     * This opens the Android Settings
+     * @param view
+     */
     public void openSettings(View view){
         openApp(this,"com.android.settings");
     }
 
+    /**
+     * This open the Application List
+     * @param view
+     */
     public void openAppList(View view){
-    startActivity(new Intent(this, MainActivity.class));
+    startActivity(new Intent(this, AdminAppList.class));
 
     }
 
+    /**
+     * This shows the Change Admin Password Dialog.
+     * @param view
+     */
     public void changeAdminPassword(View view){
         //showAlertWindow();
         changeAdminPasswordDialogBox();
     }
 
-
-    public void showAlertWindow(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Change Admin Password");
-
-        final EditText previousAdminPassword = new EditText(this);
-        previousAdminPassword.setHint("Previous Admin Password");
-        previousAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(previousAdminPassword);
-
-        final EditText newAdminPassword = new EditText(this);
-        newAdminPassword.setHint("Previous Admin Password");
-        newAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(newAdminPassword);
-
-        final EditText confirmNewAdminPassword = new EditText(this);
-        confirmNewAdminPassword.setHint("Previous Admin Password");
-        confirmNewAdminPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(confirmNewAdminPassword);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                changePassword(confirmNewAdminPassword.getText().toString(),newAdminPassword.getText().toString(),confirmNewAdminPassword.getText().toString());
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
-
+    /**
+     * This build and show Change Admin Password Dialog.
+     * A standard square box with title and ok cancel button.
+     * Inside the square is 3 text box for: Input Previous Password, New Password, and Confirm Password.
+     * A hint is provided.
+     * When Cancel, it will close the dialog with no action.
+     * When OK, changeAdminPassword is run to check if it fits the condition.
+     *
+     */
     public void changeAdminPasswordDialogBox(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
         dialog.setTitle("Change Admin Password");
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
-
-        /*
-        final EditText titleBox = new EditText(this);
-        titleBox.setHint("Title");
-        layout.addView(titleBox);
-
-        final EditText descriptionBox = new EditText(this);
-        descriptionBox.setHint("Description");
-        layout.addView(descriptionBox);
-        */
 
         final EditText previousAdminPassword = new EditText(this);
         previousAdminPassword.setHint("Input Previous Admin Password");
@@ -130,6 +113,13 @@ public class AdminMenu extends Activity {
     }
 
 
+    /**
+     * This function will change password.
+     * Failure and Success will activate a toast which will show the message.
+     * @param previousAdminPassword The old Admin Password.
+     * @param newAdminPassword The new Admin Password.
+     * @param confirmedAdminPassword The Re-enteredd Admin Password to confirm.
+     */
     public void changePassword(String previousAdminPassword, String newAdminPassword, String confirmedAdminPassword){
 
         String message = "";
@@ -157,6 +147,10 @@ public class AdminMenu extends Activity {
 
     }
 
+    /**
+     * This will show a toast with the message.
+     * @param information this is the message to show
+     */
     public void toastInformation(String information){
         Toast.makeText(this,information ,Toast.LENGTH_SHORT).show();
     }

@@ -3,7 +3,8 @@ package ch.arnab.simplelauncher;
 import java.util.ArrayList;
 
 /**
- * Created by atn01 on 11/09/2017.
+ * This Singleton store Applist and Admin Password
+ * @author atn010
  */
 
 class DataStore {
@@ -19,8 +20,6 @@ class DataStore {
     private DataStore() {
         adminPassword = "admin";
          appList = new ArrayList<>();
-         appList.add("com.atn010.primaryapp");
-
     }
     String adminPassword;
     ArrayList<String> appList;

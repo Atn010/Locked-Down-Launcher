@@ -6,7 +6,8 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 /**
- * Created by atn01 on 10/18/2017.
+ * Activated to block Pulldown.
+ * @author atn010
  */
 
 public class customViewGroup extends ViewGroup {

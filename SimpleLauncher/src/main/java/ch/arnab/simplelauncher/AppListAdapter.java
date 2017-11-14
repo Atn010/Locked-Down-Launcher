@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by Arnab Chakraborty
+ * Created by Arnab Chakraborty.
+ * This will load the Application list into the Layout.
+ * @author Arnab Chakraborty
  */
 public class AppListAdapter extends ArrayAdapter<AppModel> {
     private final LayoutInflater mInflater;

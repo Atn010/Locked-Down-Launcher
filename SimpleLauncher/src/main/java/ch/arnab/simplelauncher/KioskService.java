@@ -12,9 +12,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by atn01 on 10/18/2017.
+ * Starts a KioskService.
+ * May require configuration. Deletion is also possible.
+ * @author atn01
  */
-
 public class KioskService extends Service {
 
     private static final long INTERVAL = TimeUnit.SECONDS.toMillis(2); // periodic interval to check in seconds -> 2 seconds

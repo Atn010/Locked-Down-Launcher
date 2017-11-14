@@ -15,7 +15,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by atn01 on 11/10/2017.
+ * Load and store Application info to check later on for Checked mark.
+ * @author atn010
  */
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundButton.OnCheckedChangeListener
@@ -55,12 +56,10 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
             holder.chkSelect = (CheckBox) row.findViewById(R.id.cb_app);
 
             row.setTag(holder);
-            System.out.println("a null Row");
 
         }
         else{
             holder = (AppInfoHolder)row.getTag();
-            System.out.println(position + " is in Row");
         }
 
 
@@ -88,7 +87,6 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
 
     private void setChecked(int position, boolean isChecked) {
         mCheckStates.put(position, isChecked);
-        System.out.println(position + "Something is checked");
 
     }
 
@@ -100,11 +98,6 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> implements CompoundBut
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         mCheckStates.append((Integer) buttonView.getTag(), isChecked);
-
-
-        System.out.println((Integer) buttonView.getTag() + " Something is changed");
-
-
 
     }
     static class AppInfoHolder

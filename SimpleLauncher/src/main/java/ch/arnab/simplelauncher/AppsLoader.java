@@ -12,7 +12,13 @@ import java.util.List;
 import java.util.Comparator;
 
 /**
- * @credit http://developer.android.com/reference/android/content/AsyncTaskLoader.html
+ * This Class will load the application to display.
+ * List of application to display will be loaded from Data Store.
+ * In Case if the DataStore is empty, All the application in the Device will be loaded.
+ * All Application will be loaded alphabetically.
+ * credit http://developer.android.com/reference/android/content/AsyncTaskLoader.html
+ * @author Arnab Chakraborty
+ * @author atn010
  */
 public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
     ArrayList<AppModel> mInstalledApps;
@@ -29,6 +35,10 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
     }
 
 
+    /**
+     * Load Application.
+     * @return ArrayList<AppModel>
+     */
     @Override
     public ArrayList<AppModel> loadInBackground() {
         // retrieve the list of installed applications
@@ -43,38 +53,40 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
 
         // create corresponding apps and load their labels
         ArrayList<AppModel> items = new ArrayList<AppModel>(apps.size());
-        for (int i = 0; i < apps.size(); i++) {
-            String pkg = apps.get(i).packageName;
+        if(dataStore.appList.isEmpty()){
+            for (int i = 0; i < apps.size(); i++) {
 
-            // only apps which are launchable
-            if (context.getPackageManager().getLaunchIntentForPackage(pkg) != null) {
+                AppModel app = new AppModel(context, apps.get(i));
+                app.loadLabel(context);
 
-                for(int z =0; z<dataStore.appList.size();z++){
+                items.add(app);
+            }
+        }else {
+            for (int i = 0; i < apps.size(); i++) {
+                String pkg = apps.get(i).packageName;
 
-                    String appPackageName = dataStore.appList.get(z);
+                // only apps which are launchable
+                if (context.getPackageManager().getLaunchIntentForPackage(pkg) != null) {
+
+                    for (int z = 0; z < dataStore.appList.size(); z++) {
+
+                        String appPackageName = dataStore.appList.get(z);
 
 
-                    if (apps.get(i).packageName.contains(appPackageName)) {
+                        if (apps.get(i).packageName.contains(appPackageName)) {
 
-                        AppModel app = new AppModel(context, apps.get(i));
-                        app.loadLabel(context);
+                            AppModel app = new AppModel(context, apps.get(i));
+                            app.loadLabel(context);
 
-                        items.add(app);
-                        System.out.println("Found " + i +" = "+appPackageName);
+                            items.add(app);
+                            System.out.println("Found " + i + " = " + appPackageName);
+                        }
+
                     }
 
                 }
 
-                /*
-                if (apps.get(i).packageName.contains("com.atn010")) {
-                    AppModel app = new AppModel(context, apps.get(i));
-                    app.loadLabel(context);
-
-                    items.add(app);
-                }
-                */
             }
-
         }
 
         // sort the list
@@ -84,7 +96,10 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
     }
 
 
-
+    /**
+     * Show result to be displayed.
+     * @param apps list of applicion
+     */
     @Override
     public void deliverResult(ArrayList<AppModel> apps) {
         if (isReset()) {
@@ -112,6 +127,9 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
         }
     }
 
+    /**
+     * Start load
+     */
     @Override
     protected void onStartLoading() {
         if (mInstalledApps != null) {

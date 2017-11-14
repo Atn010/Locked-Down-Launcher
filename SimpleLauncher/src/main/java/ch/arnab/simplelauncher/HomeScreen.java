@@ -18,6 +18,15 @@ import android.view.Menu;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+/**
+ * Starts when Launcher begin in Home Screen.
+ * This class starts the necessary services to block buttons.
+ * This class can access to run Admin Menu.
+ * This could be done by a combination of Up and Down Volume Button.
+ * The action will open an Admin Login Dialog.
+ * @author Arnab Chakraborty
+ * @author atn010
+ */
 public class HomeScreen extends FragmentActivity {
 
     public final static int REQUEST_CODE = 10101;
@@ -61,6 +70,12 @@ public class HomeScreen extends FragmentActivity {
 
     }
 
+    /**
+     * Function to have display secret Admin Login
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (KeyEvent.KEYCODE_VOLUME_UP == event.getKeyCode()) {
@@ -124,10 +139,14 @@ public class HomeScreen extends FragmentActivity {
         }
         startKioskService();
 
-        //blockStatusBarPullDown();
 
     }
 
+    /**
+     * Check if Service is running.
+     * @param serviceClass
+     * @return
+     */
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -202,13 +221,13 @@ public class HomeScreen extends FragmentActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Admin Password");
 
-// Set up the input
+        // Set up the input
         final EditText input = new EditText(this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
 
-// Set up the buttons
+        // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -225,6 +244,11 @@ public class HomeScreen extends FragmentActivity {
         builder.show();
     }
 
+    /**
+     * Try to launch Admin Menu.
+     * Also stops services.
+     * @param password
+     */
     public void tryToAccessAdminApplication(String password){
 
         Log.i("Entered password", password);
