@@ -91,8 +91,7 @@ public class PowerButtonService extends Service {
 
 
     public WindowManager.LayoutParams localLayoutParams(){
-        WindowManager manager = ((WindowManager) getApplicationContext()
-                .getSystemService(Context.WINDOW_SERVICE));
+        WindowManager manager = ((WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE));
 
         WindowManager.LayoutParams localLayoutParams = new WindowManager.LayoutParams();
         localLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
