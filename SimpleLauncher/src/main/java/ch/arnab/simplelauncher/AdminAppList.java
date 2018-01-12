@@ -28,6 +28,10 @@ public class AdminAppList extends Activity {
     @SuppressLint("WrongConstant")
     DataStore dataStore = DataStore.getInstance();
 
+    private void completeList(){
+        dataStore.save(this);
+    }
+
 
     /**
      * This will load and display a list of Application.
@@ -73,6 +77,7 @@ public class AdminAppList extends Activity {
                 Toast.makeText(AdminAppList.this, result, Toast.LENGTH_SHORT).show();
                 dataStore.appList.clear();
                 dataStore.appList.addAll(appList);
+                completeList();
                 finish();
             }
 

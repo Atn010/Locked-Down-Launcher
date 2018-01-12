@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.service.notification.NotificationListenerService;
 import android.support.v4.app.FragmentActivity;
 import android.text.InputType;
 import android.util.Log;
@@ -34,7 +35,6 @@ public class HomeScreen extends FragmentActivity {
     private long mUpKeyEventTime = 0;
 
     DataStore dataStore = DataStore.getInstance();
-
 
 
     /**
@@ -133,6 +133,10 @@ public class HomeScreen extends FragmentActivity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.homescreen);
+        System.out.println("This is homescreen");
+        dataStore.load(this);
+
+
 
         if (checkDrawOverlayPermission()) {
             startService(new Intent(this, PowerButtonService.class));
@@ -164,6 +168,8 @@ public class HomeScreen extends FragmentActivity {
      */
     private void startKioskService() {
         startService(new Intent(this, KioskService.class));
+        startService(new Intent(this, NotificationListenerService.class));
+
     }
 
 
@@ -244,6 +250,8 @@ public class HomeScreen extends FragmentActivity {
         builder.show();
     }
 
+
+
     /**
      * Try to launch Admin Menu.
      * Also stops services.
@@ -252,13 +260,19 @@ public class HomeScreen extends FragmentActivity {
     public void tryToAccessAdminApplication(String password){
 
         Log.i("Entered password", password);
+        password = DataStore.hashString(password);
 
+        //System.out.println(dataStore.adminPassword);
+        //System.out.println(password.equals(dataStore.adminPassword)+" || - " +password);
         if(password.equals(dataStore.adminPassword) ) {
             Intent intent1 = new Intent(this, PowerButtonService.class);
             stopService(intent1);
 
             Intent intent2 = new Intent(this, KioskService.class);
             stopService(intent2);
+
+            Intent intent3 = new Intent(this, NotificationListenerService.class);
+            stopService(intent3);
 
             startActivity(new Intent(this,AdminMenu.class));
         }

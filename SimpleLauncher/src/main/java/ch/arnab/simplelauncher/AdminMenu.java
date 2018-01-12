@@ -123,13 +123,15 @@ public class AdminMenu extends Activity {
     public void changePassword(String previousAdminPassword, String newAdminPassword, String confirmedAdminPassword){
 
         String message = "";
+        previousAdminPassword = DataStore.hashString(previousAdminPassword);
         if(previousAdminPassword.equals(dataStore.adminPassword)){
 
             if(newAdminPassword.length()>=5){
 
                 if(newAdminPassword.equals(confirmedAdminPassword)){
-                    dataStore.adminPassword = newAdminPassword;
+                    dataStore.adminPassword = DataStore.hashString(newAdminPassword);
                     message = "successfully changed admin password";
+                    dataStore.save(this);
                 }else {
                     message = "new and confirm admin password does not match";
                 }

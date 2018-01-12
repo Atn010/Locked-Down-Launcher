@@ -101,6 +101,12 @@ public class PowerButtonService extends Service {
                 // this is to enable the notification to recieve touch events
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
 
+                // This blocks Screenshot
+                WindowManager.LayoutParams.FLAG_SECURE |
+
+                // This keeps the screen on
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
+
                 // Draws over status bar
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 
@@ -122,6 +128,7 @@ public class PowerButtonService extends Service {
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_FULLSCREEN
                         | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+                        | WindowManager.LayoutParams.FLAG_SECURE
                         | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 PixelFormat.TRANSLUCENT);
         params.gravity = Gravity.START | Gravity.CENTER_VERTICAL;

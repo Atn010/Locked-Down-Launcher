@@ -41,18 +41,27 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
      */
     @Override
     public ArrayList<AppModel> loadInBackground() {
+
         // retrieve the list of installed applications
         List<ApplicationInfo> apps = mPm.getInstalledApplications(0);
-
+        System.out.println(dataStore.appList);
 
         if (apps == null) {
             apps = new ArrayList<ApplicationInfo>();
         }
 
         final Context context = getContext();
-
+        System.out.println("This is App Loader");
         // create corresponding apps and load their labels
         ArrayList<AppModel> items = new ArrayList<AppModel>(apps.size());
+
+
+
+        if(!dataStore.appList.isEmpty()){
+            dataStore.save(context);
+        }
+
+
         if(dataStore.appList.isEmpty()){
             for (int i = 0; i < apps.size(); i++) {
 
@@ -62,6 +71,8 @@ public class AppsLoader extends AsyncTaskLoader<ArrayList<AppModel>> {
                 items.add(app);
             }
         }else {
+
+
             for (int i = 0; i < apps.size(); i++) {
                 String pkg = apps.get(i).packageName;
 
