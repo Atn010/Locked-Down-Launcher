@@ -1,5 +1,4 @@
-package ch.arnab.simplelauncher;
-
+package com.atn010.lockeddownlauncher;
 /*
  * Created by Thomas Barrasso on 9/11/12.
  * Copyright (c) 2012 Loupe Inc.

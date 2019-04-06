@@ -1,4 +1,4 @@
-package ch.arnab.simplelauncher;
+package com.atn010.lockeddownlauncher;
 
 import android.app.Service;
 import android.content.Context;
@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-
-import com.atn010.lockeddownlauncher.R;
 
 import java.util.concurrent.TimeUnit;
 

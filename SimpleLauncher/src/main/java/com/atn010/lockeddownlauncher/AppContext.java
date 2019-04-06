@@ -1,4 +1,4 @@
-package ch.arnab.simplelauncher;
+package com.atn010.lockeddownlauncher;
 
 import android.app.Application;
 import android.content.Context;

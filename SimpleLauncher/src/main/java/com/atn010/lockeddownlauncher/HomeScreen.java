@@ -1,4 +1,4 @@
-package ch.arnab.simplelauncher;
+package com.atn010.lockeddownlauncher;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
@@ -18,8 +18,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.WindowManager;
 import android.widget.EditText;
-
-import com.atn010.lockeddownlauncher.R;
 
 /**
  * Starts when Launcher begin in Home Screen.

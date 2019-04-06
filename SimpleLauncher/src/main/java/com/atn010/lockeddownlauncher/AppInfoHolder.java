@@ -1,5 +1,4 @@
-package ch.arnab.simplelauncher;
-
+package com.atn010.lockeddownlauncher;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;

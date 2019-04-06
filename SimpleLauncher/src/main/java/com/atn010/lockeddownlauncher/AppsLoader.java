@@ -1,4 +1,4 @@
-package ch.arnab.simplelauncher;
+package com.atn010.lockeddownlauncher;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -8,8 +8,8 @@ import android.support.v4.content.AsyncTaskLoader;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * This Class will load the application to display.

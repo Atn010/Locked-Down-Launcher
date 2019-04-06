@@ -1,4 +1,4 @@
-package ch.arnab.simplelauncher;
+package com.atn010.lockeddownlauncher;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,8 +11,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.atn010.lockeddownlauncher.R;
 
 import java.util.ArrayList;
 

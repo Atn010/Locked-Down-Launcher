@@ -1,4 +1,4 @@
-package ch.arnab.simplelauncher;
+package com.atn010.lockeddownlauncher;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.atn010.lockeddownlauncher.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +24,9 @@ import java.util.List;
  */
 public class AdminAppList extends Activity {
     AppInfoAdapter adapter ;
-    AppInfo app_info[] ;
+   AppInfo app_info[] ;
     @SuppressLint("WrongConstant")
-    DataStore dataStore = DataStore.getInstance();
+   DataStore dataStore = DataStore.getInstance();
 
     private void completeList(){
         dataStore.save(this);
