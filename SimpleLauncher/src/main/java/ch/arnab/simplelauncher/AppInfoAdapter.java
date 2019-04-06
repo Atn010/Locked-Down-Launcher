@@ -12,6 +12,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.atn010.lockeddownlauncher.R;
+
 import java.util.ArrayList;
 
 /**

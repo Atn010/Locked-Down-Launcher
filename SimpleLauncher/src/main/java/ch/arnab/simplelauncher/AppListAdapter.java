@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.atn010.lockeddownlauncher.R;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

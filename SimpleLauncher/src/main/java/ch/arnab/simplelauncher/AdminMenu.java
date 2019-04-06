@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.atn010.lockeddownlauncher.R;
+
 /**
  * This a menu Activity which display 3 menu button which:
  * Open Android Settings, Change Application Display List, and Open Change Password Window.
